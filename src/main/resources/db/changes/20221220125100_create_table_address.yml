@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20221220125100_create_table_address
+      author: fsobanski
+      changes:
+        - createTable:
+            tableName: ADDRESS
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: ADDRESS_PK
+                  name: ID
+                  type: NUMBER(19)
+              - column:
+                  name: COUNTRY
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CITY
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: STREET
+                  type: VARCHAR(120)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ZIPCODE
+                  type: VARCHAR(12)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CUSTOMER_ID
+                  type: NUMBER(19)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_address_customer
+                    references: CUSTOMER(ID)
+  - changeSet:
+      id: 20221220125100_create_address_seq
+      author: fsobanski
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: address_seq
+            startValue: 1
+            minValue: 1
+            maxValue: 9223372036854775807

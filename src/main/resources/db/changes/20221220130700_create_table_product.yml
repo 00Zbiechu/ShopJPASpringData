@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20221220130700_create_table_product
+      author: fsobanski
+      changes:
+        - createTable:
+            tableName: PRODUCT
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PRODUCT_PK
+                  name: ID
+                  type: NUMBER(19)
+              - column:
+                  name: NAME
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: AVAILABLE_QUANTITY
+                  type: NUMBER(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PRICE
+                  type: NUMBER(19,2)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 20221220130700_create_product_seq
+      author: fsobanski
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: product_seq
+            startValue: 1
+            minValue: 1
+            maxValue: 9223372036854775807

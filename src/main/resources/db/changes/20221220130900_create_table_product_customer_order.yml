@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20221220130900_create_table_product_customer_order
+      author: fsobanski
+      changes:
+        - createTable:
+            tableName: PRODUCT_CUSTOMER_ORDER
+            columns:
+              - column:
+                  name: PRODUCT_ID
+                  type: NUMBER(19)
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PRODUCT_ORDER_PK
+                    foreignKeyName: fk_product_order_product
+                    references: PRODUCT(ID)
+              - column:
+                  name: CUSTOMER_ORDER_ID
+                  type: NUMBER(19)
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PRODUCT_ORDER_PK
+                    foreignKeyName: fk_product_customer_order_customer_order
+                    references: CUSTOMER_ORDER(ID)
+

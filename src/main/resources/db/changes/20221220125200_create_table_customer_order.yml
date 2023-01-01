@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20221220125200_create_table_customer_order
+      author: fsobanski
+      changes:
+        - createTable:
+            tableName: CUSTOMER_ORDER
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: ORDER_PK
+                  name: ID
+                  type: NUMBER(19)
+              - column:
+                  name: TOTAL_PRICE
+                  type: NUMBER(19,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CUSTOMER_ID
+                  type: NUMBER(19)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_customer_order_customer
+                    references: CUSTOMER(ID)
+  - changeSet:
+      id: 20221220125200_create_customer_order_seq
+      author: fsobanski
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: customer_order_seq
+            startValue: 1
+            minValue: 1
+            maxValue: 9223372036854775807
