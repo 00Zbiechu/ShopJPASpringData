@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.excercise.jpa.entity.AddressEntity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -15,7 +16,8 @@ public interface AddressRepository extends JpaRepository<AddressEntity, Long> {
      List<AddressEntity> getAddressByCountryOrStreet(String param);
 
 //     2. Stwórz metodę, która wyciąganie encje Address dla wartości mniejszych birthDate powiązanej encji Customer, od podanej wartości.
-
+     @Query("SELECT a FROM AddressEntity a JOIN a.customer c WHERE c.birthDate<:date")
+     List<AddressEntity> getAddressForOlderCustomerThanParam(LocalDate date);
 
     /*
     * 3. Stwórz metodę, która wyciągnie projekcje wszystkich encji Address, zawierającą tylko pola country, street, zipcode.
