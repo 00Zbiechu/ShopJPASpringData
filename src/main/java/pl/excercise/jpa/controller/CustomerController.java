@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.excercise.jpa.model.CustomerDTO;
+import pl.excercise.jpa.projection.CustomerFullName;
 import pl.excercise.jpa.service.CustomerService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -18,11 +20,33 @@ public class CustomerController {
     private final CustomerService customerService;
 
 
-    @GetMapping("/getCustomerEntitiesByAddressCountryOrderByBirthDate/{country}")
-    public List<CustomerDTO> getCustomerEntitiesByAddressCountryOrderByBirthDateAsc(@PathVariable("country") String country){
+    @GetMapping("/getCustomerByCountry/{country}")
+    public List<CustomerDTO> getCustomerByCountry(@PathVariable("country") String country){
 
-        return customerService.getCustomerEntitiesByAddressCountryOrderByBirthDateAsc(country);
+        return customerService.findCustomerEntitiesByAddress_CountryOrderByBirthDateAsc(country);
 
     }
+
+
+    @GetMapping("/getFullName")
+    public List<CustomerFullName> getFullName(){
+        return customerService.findAllByOrderBySurnameAsc();
+    }
+
+
+    @GetMapping("/getCustomerYoungerThanDate/{date}")
+    public List<CustomerDTO> getCustomerYoungerThanDate(@PathVariable("date") LocalDate localDate){
+
+        return customerService.getCustomerYoungerThanDate(localDate);
+
+    }
+
+    @GetMapping("/getSurnameContainsParam/{param}")
+    public List<CustomerDTO> getSurnameContainsParam(@PathVariable("param") String param){
+
+        return customerService.getSurnameContainsParam(param);
+
+    }
+
 
 }
