@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.excercise.jpa.model.AddressDTO;
 import pl.excercise.jpa.model.AddressMapper;
+import pl.excercise.jpa.projection.AddressAndCustomerBirthDate;
+import pl.excercise.jpa.projection.AddressCountryStreetZipcode;
 import pl.excercise.jpa.repository.AddressRepository;
 
 import java.time.LocalDate;
@@ -26,9 +28,12 @@ public class AddressServiceImpl implements AddressService{
     }
 
     @Override
-    public List<AddressDTO> getAddressForOlderCustomerThanParam(LocalDate date) {
-        return addressRepository.getAddressForOlderCustomerThanParam(date).stream()
-                .map(AddressMapper.INSTANCE::addressToAddressDTO)
-                .collect(Collectors.toList());
+    public List<AddressAndCustomerBirthDate> getAddressForOlderCustomerThanParam(LocalDate date) {
+        return addressRepository.getAddressForOlderCustomerThanParam(date);
+    }
+
+    @Override
+    public List<AddressCountryStreetZipcode> getAddressCountryStreetZipcode() {
+        return addressRepository.getAddressCountryStreetZipcode();
     }
 }
