@@ -1,8 +1,14 @@
-package pl.excercise.jpa.model.entity;
+package pl.excercise.jpa.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "address")
 public class AddressEntity {
 

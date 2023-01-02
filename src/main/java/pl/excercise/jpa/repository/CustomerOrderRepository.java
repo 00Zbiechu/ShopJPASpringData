@@ -1,8 +1,8 @@
-package pl.excercise.jpa.model.repository;
+package pl.excercise.jpa.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.excercise.jpa.model.entity.CustomerOrderEntity;
+import pl.excercise.jpa.entity.CustomerOrderEntity;
 
 @Repository
 public interface CustomerOrderRepository extends JpaRepository<CustomerOrderEntity, Long> {
