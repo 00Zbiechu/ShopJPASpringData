@@ -5,9 +5,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.excercise.jpa.entity.AddressEntity;
 import pl.excercise.jpa.entity.CustomerEntity;
+import pl.excercise.jpa.entity.ProductEntity;
 import pl.excercise.jpa.repository.AddressRepository;
 import pl.excercise.jpa.repository.CustomerRepository;
+import pl.excercise.jpa.repository.ProductRepository;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -16,6 +19,8 @@ public class DatabaseInitializer {
 
     private final CustomerRepository customerRepository;
     private final AddressRepository addressRepository;
+
+    private final ProductRepository productRepository;
 
     @PostConstruct
     public void initDatabase(){
@@ -80,6 +85,34 @@ public class DatabaseInitializer {
                 .build();
 
         addressRepository.save(addressEntityThird);
+
+
+        //Products ------------------------------------------------------------------------------
+
+
+        ProductEntity productEntity = ProductEntity.builder()
+                .name("Maslo")
+                .price(BigDecimal.valueOf(5.99))
+                .availableQuantity(100)
+                .build();
+
+        productRepository.save(productEntity);
+
+        ProductEntity productEntitySecond = ProductEntity.builder()
+                .name("Chleb")
+                .price(BigDecimal.valueOf(3.99))
+                .availableQuantity(50)
+                .build();
+
+        productRepository.save(productEntitySecond);
+
+        ProductEntity productEntityThird = ProductEntity.builder()
+                .name("Bulka")
+                .price(BigDecimal.valueOf(0.99))
+                .availableQuantity(200)
+                .build();
+
+        productRepository.save(productEntityThird);
 
 
     }
