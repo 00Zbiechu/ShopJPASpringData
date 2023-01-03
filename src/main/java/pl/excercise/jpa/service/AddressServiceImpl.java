@@ -6,9 +6,12 @@ import org.springframework.stereotype.Service;
 import pl.excercise.jpa.model.AddressDTO;
 import pl.excercise.jpa.model.AddressMapper;
 import pl.excercise.jpa.projection.AddressAndCustomerBirthDate;
+import pl.excercise.jpa.projection.AddressAndTotalPrice;
 import pl.excercise.jpa.projection.AddressCountryStreetZipcode;
+import pl.excercise.jpa.projection.TotalPriceByCity;
 import pl.excercise.jpa.repository.AddressRepository;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,5 +38,15 @@ public class AddressServiceImpl implements AddressService{
     @Override
     public List<AddressCountryStreetZipcode> getAddressCountryStreetZipcode() {
         return addressRepository.getAddressCountryStreetZipcode();
+    }
+
+    @Override
+    public List<AddressAndTotalPrice> getAddressCustomerWhoPaidMoreThanParam(BigDecimal value) {
+        return addressRepository.getAddressCustomerWhoPaidMoreThanParam(value);
+    }
+
+    @Override
+    public List<TotalPriceByCity> getSumOfTotalPriceCity(String city) {
+        return addressRepository.getSumOfTotalPriceCity(city);
     }
 }

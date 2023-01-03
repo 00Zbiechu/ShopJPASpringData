@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.excercise.jpa.model.AddressDTO;
 import pl.excercise.jpa.projection.AddressAndCustomerBirthDate;
+import pl.excercise.jpa.projection.AddressAndTotalPrice;
 import pl.excercise.jpa.projection.AddressCountryStreetZipcode;
+import pl.excercise.jpa.projection.TotalPriceByCity;
 import pl.excercise.jpa.service.AddressService;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -42,5 +45,17 @@ public class AddressController {
             return addressService.getAddressCountryStreetZipcode();
 
         }
+
+
+        @GetMapping("/getAddressCustomerWhoPaidMoreThanParam/{value}")
+        public List<AddressAndTotalPrice> getAddressCustomerWhoPaidMoreThanParam(@PathVariable("value") BigDecimal value) {
+
+            return addressService.getAddressCustomerWhoPaidMoreThanParam(value);
+        }
+
+    @GetMapping("/getSumOfTotalPriceCity/{city}")
+    List<TotalPriceByCity> getSumOfTotalPriceCity(@PathVariable("city") String city) {
+        return addressService.getSumOfTotalPriceCity(city);
+    }
 
 }
