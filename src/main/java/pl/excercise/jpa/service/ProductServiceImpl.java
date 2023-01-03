@@ -41,4 +41,11 @@ public class ProductServiceImpl implements ProductService{
 
         return listProducts;
     }
+
+    @Override
+    public List<ProductDTO> getProductEntitiesByCustomerFirstName(String name) {
+        return productRepository.getProductEntitiesByCustomerFirstName(name).stream()
+                .map(ProductMapper.INSTANCE::productToProductDTO)
+                .collect(Collectors.toList());
+    }
 }

@@ -13,4 +13,7 @@ public interface ProductService {
 
     List<ProductDTO> findAll(int pageNumber, int pageSize);
 
+
+    List<ProductDTO> getProductEntitiesByCustomerFirstName(String name);
+
 }
