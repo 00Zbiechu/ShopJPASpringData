@@ -4,6 +4,7 @@ package pl.excercise.jpa.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.excercise.jpa.model.ProductDTO;
 import pl.excercise.jpa.service.ProductService;
@@ -23,8 +24,8 @@ public class ProductController {
     }
 
     @GetMapping("/getPageOfProducts")
-    List<ProductDTO> getPageOfProducts(){
-        return productService.getPageOfProducts();
+    List<ProductDTO> getPageOfProducts(@RequestParam int page, @RequestParam int size){
+        return productService.findAll(page,size);
     }
 
 

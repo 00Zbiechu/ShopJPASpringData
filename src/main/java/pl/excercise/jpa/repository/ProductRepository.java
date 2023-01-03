@@ -1,5 +1,6 @@
 package pl.excercise.jpa.repository;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,11 +17,13 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
 	@Query("SELECT p FROM ProductEntity p ORDER BY p.price DESC LIMIT 1")
 	List<ProductEntity> getTopProductWithHighestPrice();
 
-	@Query("SELECT p FROM ProductEntity p")
-	List<ProductEntity> getPageOfProducts(Pageable pageable);
+//  2. Stwórz metodę, która wyciągnie obiekt Page<Product>.
+	Page<ProductEntity> findAll(Pageable pageable);
+
+
+
 
 	/*
-	 * 2. Stwórz metodę, która wyciągnie obiekt Page<Product>.
 	 * 3. Stwórz metodę, która wyciąganie unikalną listę encji Product, po polu Product.orders.customer.firstName
 	 * */
 }

@@ -2,8 +2,10 @@ package pl.excercise.jpa.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.excercise.jpa.entity.CustomerOrderEntity;
 import pl.excercise.jpa.model.CustomerDTO;
 import pl.excercise.jpa.model.CustomerMapper;
+import pl.excercise.jpa.model.CustomerOrderDTO;
 import pl.excercise.jpa.projection.CustomerFullName;
 import pl.excercise.jpa.repository.CustomerRepository;
 
@@ -46,5 +48,6 @@ public class CustomerServiceImpl implements CustomerService{
                 .map(CustomerMapper.INSTANCE::customerToCustomerDTO)
                 .collect(Collectors.toList());
     }
+
 
 }

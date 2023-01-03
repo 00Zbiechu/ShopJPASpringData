@@ -5,13 +5,16 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.excercise.jpa.entity.AddressEntity;
 import pl.excercise.jpa.entity.CustomerEntity;
+import pl.excercise.jpa.entity.CustomerOrderEntity;
 import pl.excercise.jpa.entity.ProductEntity;
 import pl.excercise.jpa.repository.AddressRepository;
+import pl.excercise.jpa.repository.CustomerOrderRepository;
 import pl.excercise.jpa.repository.CustomerRepository;
 import pl.excercise.jpa.repository.ProductRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 @AllArgsConstructor
 @Component
@@ -21,6 +24,8 @@ public class DatabaseInitializer {
     private final AddressRepository addressRepository;
 
     private final ProductRepository productRepository;
+
+    private final CustomerOrderRepository customerOrderRepository;
 
     @PostConstruct
     public void initDatabase(){
@@ -115,6 +120,40 @@ public class DatabaseInitializer {
         productRepository.save(productEntityThird);
 
 
+        //CustomerOrder -----------------------------------------------------------------------------
+
+        //Ceny
+        BigDecimal productEntityOne = productEntity.getPrice();
+        BigDecimal productEntityTwo = productEntitySecond.getPrice();
+        BigDecimal productEntityThree = productEntityThird.getPrice();
+
+
+        CustomerOrderEntity customerOrderEntity = CustomerOrderEntity.builder()
+                .totalPrice(productEntityOne.add(productEntityTwo).add(productEntityThree))
+                .customer(customer)
+                .products(Set.of(productEntity,productEntitySecond,productEntityThird))
+                .build();
+
+        customerOrderRepository.save(customerOrderEntity);
+
+        CustomerOrderEntity customerOrderEntitySecond = CustomerOrderEntity.builder()
+                .totalPrice(productEntityTwo.add(productEntityThree))
+                .customer(customerSecond)
+                .products(Set.of(productEntitySecond,productEntityThird))
+                .build();
+
+        customerOrderRepository.save(customerOrderEntitySecond);
+
+        CustomerOrderEntity customerOrderEntityThird = CustomerOrderEntity.builder()
+                .totalPrice(productEntityOne.add(productEntityThree))
+                .customer(customerThird)
+                .products(Set.of(productEntity,productEntityThird))
+                .build();
+
+        customerOrderRepository.save(customerOrderEntityThird);
+
+
     }
+
 
 }

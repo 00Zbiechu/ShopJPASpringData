@@ -1,6 +1,8 @@
 package pl.excercise.jpa.service;
 
+import pl.excercise.jpa.entity.CustomerOrderEntity;
 import pl.excercise.jpa.model.CustomerDTO;
+import pl.excercise.jpa.model.CustomerOrderDTO;
 import pl.excercise.jpa.projection.CustomerFullName;
 
 import java.time.LocalDate;
@@ -15,5 +17,6 @@ public interface CustomerService {
     List<CustomerDTO> getCustomerYoungerThanDate(LocalDate localDate);
 
     List<CustomerDTO> getSurnameContainsParam(String param);
+
 
 }

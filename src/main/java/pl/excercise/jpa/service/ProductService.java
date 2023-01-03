@@ -1,5 +1,6 @@
 package pl.excercise.jpa.service;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import pl.excercise.jpa.entity.ProductEntity;
 import pl.excercise.jpa.model.ProductDTO;
@@ -10,6 +11,6 @@ public interface ProductService {
 
     List<ProductDTO> getTopProductWithHighestPrice();
 
-    List<ProductDTO> getPageOfProducts();
+    List<ProductDTO> findAll(int pageNumber, int pageSize);
 
 }

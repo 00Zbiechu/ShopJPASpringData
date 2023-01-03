@@ -2,6 +2,7 @@ package pl.excercise.jpa.service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,10 +28,17 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public List<ProductDTO> getPageOfProducts() {
-        Pageable pageable = PageRequest.of(2,3);
-        return productRepository.getPageOfProducts(pageable).stream()
+    public List<ProductDTO> findAll(int pageNumber, int pageSize) {
+
+
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+
+        Page<ProductEntity> page = productRepository.findAll(pageable);
+
+        List<ProductDTO> listProducts = page.getContent().stream()
                 .map(ProductMapper.INSTANCE::productToProductDTO)
                 .collect(Collectors.toList());
+
+        return listProducts;
     }
 }
