@@ -5,10 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.excercise.jpa.model.AddressDTO;
 import pl.excercise.jpa.model.AddressMapper;
-import pl.excercise.jpa.projection.AddressAndCustomerBirthDate;
-import pl.excercise.jpa.projection.AddressAndTotalPrice;
-import pl.excercise.jpa.projection.AddressCountryStreetZipcode;
-import pl.excercise.jpa.projection.TotalPriceByCity;
+import pl.excercise.jpa.projection.*;
 import pl.excercise.jpa.repository.AddressRepository;
 
 import java.math.BigDecimal;
@@ -36,7 +33,7 @@ public class AddressServiceImpl implements AddressService{
     }
 
     @Override
-    public List<AddressCountryStreetZipcode> getAddressCountryStreetZipcode() {
+    public List<AddressCountryStreetZipcodeDTO> getAddressCountryStreetZipcode() {
         return addressRepository.getAddressCountryStreetZipcode();
     }
 

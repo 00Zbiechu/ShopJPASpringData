@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.excercise.jpa.model.AddressDTO;
-import pl.excercise.jpa.projection.AddressAndCustomerBirthDate;
-import pl.excercise.jpa.projection.AddressAndTotalPrice;
-import pl.excercise.jpa.projection.AddressCountryStreetZipcode;
-import pl.excercise.jpa.projection.TotalPriceByCity;
+import pl.excercise.jpa.projection.*;
 import pl.excercise.jpa.service.AddressService;
 
 import java.math.BigDecimal;
@@ -40,7 +37,7 @@ public class AddressController {
         }
 
         @GetMapping("/getAddressCountryStreetZipcode")
-        List<AddressCountryStreetZipcode> getAddressCountryStreetZipcode(){
+        List<AddressCountryStreetZipcodeDTO> getAddressCountryStreetZipcode(){
 
             return addressService.getAddressCountryStreetZipcode();
 

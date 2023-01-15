@@ -4,10 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.excercise.jpa.entity.AddressEntity;
-import pl.excercise.jpa.projection.AddressAndCustomerBirthDate;
-import pl.excercise.jpa.projection.AddressAndTotalPrice;
-import pl.excercise.jpa.projection.AddressCountryStreetZipcode;
-import pl.excercise.jpa.projection.TotalPriceByCity;
+import pl.excercise.jpa.projection.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -25,8 +22,8 @@ public interface AddressRepository extends JpaRepository<AddressEntity, Long> {
      List<AddressAndCustomerBirthDate> getAddressForOlderCustomerThanParam(LocalDate date);
 
 //     3. Stwórz metodę, która wyciągnie projekcje wszystkich encji Address, zawierającą tylko pola country, street, zipcode.
-     @Query("SELECT a FROM AddressEntity a")
-     List<AddressCountryStreetZipcode> getAddressCountryStreetZipcode();
+     @Query("SELECT new pl.excercise.jpa.projection.AddressCountryStreetZipcodeDTO(a.country, a.street, a.zipcode) FROM AddressEntity a")
+     List<AddressCountryStreetZipcodeDTO> getAddressCountryStreetZipcode();
 
 //     4. Stwórz metodę, która wyciągnie unikalne encje Address powiązane z encją Customer, których chociaż jedno z CustomerOrderEntity miało pole totalPrice większe od podanego w argumencie.
      @Query("SELECT DISTINCT a.street as street,a.country as country, a.city as city,co.totalPrice as totalPrice FROM AddressEntity AS a JOIN a.customer AS c JOIN c.orders co WHERE co.totalPrice>:value")
